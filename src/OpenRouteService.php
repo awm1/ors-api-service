@@ -36,9 +36,9 @@ abstract class OpenRouteService
         "Content-Type" => "application/json; charset=utf-8"
     ];
 
-    public function __construct()
+    public function __construct(string $api_key = null)
     {
-        $this->api_key =  env('ORS_API_KEY', null);
+        $this->api_key = $api_key ??  env('ORS_API_KEY', null);
     }
 
 
