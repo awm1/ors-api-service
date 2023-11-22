@@ -30,15 +30,19 @@ abstract class OpenRouteService
     const PROFIL_WHEELCHAIR = "wheelchair";
 
     private $api_key;
-    private $base_url = "https://api.openrouteservice.org";
+    private $base_url;
     private $base_headers = [
         "Accept" => "application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8",
         "Content-Type" => "application/json; charset=utf-8"
     ];
 
-    public function __construct(string $api_key = null, $additional_headers = [])
-    {
-        $this->api_key = $api_key ??  env('ORS_API_KEY', null);
+    public function __construct(
+        string $api_key = null,
+        string $base_url = null,
+        $additional_headers = []
+    ) {
+        $this->api_key = $api_key ?? env('ORS_API_KEY', null);
+        $this->base_url = $base_url ?? "https://api.openrouteservice.org";
 
         if (!empty($additional_headers)) {
             $this->base_headers = array_merge($this->base_headers, $additional_headers);
